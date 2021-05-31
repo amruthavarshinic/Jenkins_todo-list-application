@@ -1,20 +1,25 @@
-/* example:job name 
-* branch : main
-*/
+// pipelineJob : Component 
+// url : github url
+// brach name : */main 
+// scriptPath : Jenkinsfile
 
-freeStyleJob('sample') {
-    logRotator(-1, 10)
-    jdk('Java 8')
-    scm {
-        github('jenkinsci/job-dsl-plugin', 'master')
+pipelineJob('frontend-ci') {
+  configure { flowdefinition ->
+    flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
+      'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
+        'userRemoteConfigs' {
+          'hudson.plugins.git.UserRemoteConfig' {
+            'url'('https://github.com/zs-amrutha/frontend.git')
+          }
+        }
+        'branches' {
+          'hudson.plugins.git.BranchSpec' {
+            'name'('*/main')
+          }
+        }
+      }
+      'scriptPath'('Jenkinsfile')
+      'lightweight'(true)
     }
-    triggers {
-        githubPush()
-    }
-    steps {
-        gradle('clean build')
-    }
-    publishers {
-        archiveArtifacts('job-dsl-plugin/build/libs/job-dsl.hpi')
-    }
+  }
 }
