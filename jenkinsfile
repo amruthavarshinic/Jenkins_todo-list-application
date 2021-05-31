@@ -2,16 +2,15 @@ pipeline {
 
  agent {
    node {
-     label 'agent'
+     label 'agent1'
    }
  }
 
- stages {
-
-   stage('Hello') {
-     steps {
-       echo "Hello"
-     }
-   }
-
- }
+    stages {
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+    }
+}
