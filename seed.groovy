@@ -2,7 +2,7 @@
 * branch : main
 */
 
-freeStyleJob('example') {
+freeStyleJob('sample') {
     logRotator(-1, 10)
     jdk('Java 8')
     scm {
