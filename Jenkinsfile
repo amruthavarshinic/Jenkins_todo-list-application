@@ -1,10 +1,5 @@
 pipeline {
-
- agent {
-   node {
-     label 'agent'
-   }
- }
+    agent any
 
     stages {
         stage('Hello') {
@@ -14,22 +9,14 @@ pipeline {
         }
     }
 
- post {
-   always {
-     echo "Post Action"
-   }
- }
+     post {
+       always {
+         echo "Post Action"
+       }
+     }
 
- pipeline {
-  agent any
+    }
 
-  options {
-    disableConcurrentBuilds()
-  }
-
-  environment {
-    PROJECT_NAME = "TODOAPP"
-    UBUNTU_SSH_CRED = credentials('UBUNTU-SSH')
-  }
- }
 }
+
+
