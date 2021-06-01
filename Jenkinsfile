@@ -27,4 +27,3 @@ pipeline {
         UBUNTU_SSH_CRED = credentials('UBUNTU-SSH')
       }
 }
-
