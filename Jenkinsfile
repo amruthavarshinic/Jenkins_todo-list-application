@@ -14,9 +14,5 @@ pipeline {
          echo "Post Action"
        }
      }
-
-    }
-
 }
-
 
