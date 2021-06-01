@@ -30,5 +30,4 @@ pipeline {
     PROJECT_NAME = "TODOAPP"
     UBUNTU_SSH_CRED = credentials('UBUNTU-SSH')
   }
-
 }
