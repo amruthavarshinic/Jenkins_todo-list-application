@@ -14,5 +14,17 @@ pipeline {
          echo "Post Action"
        }
      }
+
+     pipeline {
+      agent any
+
+      options {
+        disableConcurrentBuilds()
+      }
+
+      environment {
+        PROJECT_NAME = "TODOAPP"
+        UBUNTU_SSH_CRED = credentials('UBUNTU-SSH')
+      }
 }
 
