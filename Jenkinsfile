@@ -19,6 +19,7 @@ pipeline {
      echo "Post Action"
    }
  }
+
  pipeline {
   agent any
 
