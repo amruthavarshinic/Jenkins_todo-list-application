@@ -23,7 +23,7 @@ pipeline {
       }
 
       environment {
-        PROJECT_NAME = "TODOAPP"
+        PROJECT_NAME = "TODO"
         UBUNTU_SSH_CRED = credentials('UBUNTU-SSH')
       }
      }
