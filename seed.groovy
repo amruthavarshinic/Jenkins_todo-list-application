@@ -3,12 +3,13 @@
 // brach name : */main 
 // scriptPath : Jenkinsfile
 
-folder('TODO_CI-Pipelines') {
-  displayName('TODO_CI-Pipelines')
-  description('TODO_CI-Pipelines')
-}
-
 pipelineJob('frontend-ci') {
+  folder('TODO_CI Pipelines') {
+    displayName('TODO_CI Pipelines')
+    description('TODO_CI Pipelines')
+  }
+
+pipelineJob('TODO_CI Pipelines/frontend-ci') {
   configure { flowdefinition ->
     flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
       'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
