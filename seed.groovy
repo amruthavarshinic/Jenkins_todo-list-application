@@ -16,7 +16,7 @@ pipelineJob('frontend-ci') {
         'scm'(class: 'hudson.plugins.git.GitSCM', plugin: 'git') {
           'userRemoteConfigs' {
             'hudson.plugins.git.UserRemoteConfig' {
-              'url'('https://github.com/zsdevops01/frontend.git')
+              'url'('https://github.com/zs-amrutha/frontend.git')
             }
           }
           'branches' {
