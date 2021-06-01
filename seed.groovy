@@ -1,7 +1,12 @@
-// pipelineJob : Component 
+//pipelineJob : Component
 // url : github url
 // brach name : */main 
-// scriptPath : Jenk
+// scriptPath : Jenkinsfile
+
+folder('TODO_CI-Pipelines') {
+  displayName('TODO_CI-Pipelines')
+  description('TODO_CI-Pipelines')
+}
 
 pipelineJob('frontend-ci') {
   configure { flowdefinition ->
