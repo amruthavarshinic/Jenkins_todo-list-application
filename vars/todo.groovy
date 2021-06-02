@@ -40,7 +40,7 @@ def call(Map params = [:]) {
         when {
             environment name: 'APP_TYPE', value: 'NGINX'  
         }
-
+        
         steps {
             sh '''
               zip ../${COMPONENT}.zip node_modules server.js
@@ -71,6 +71,63 @@ def call(Map params = [:]) {
       }
     }
 
+    stage ('Downloade Dependecies - todo') {
+        when {
+            environment name: 'APP_TYPE', value: 'NODEJS'
+        }
+        steps {
+            sh '''
+              npm install
+            '''
+        }
+    
+    }
+
+    stage('Prepare Artifacts - todo') {
+        when {
+            environment name: 'APP_TYPE', value: 'NODEJS'  
+        }
+        steps {
+            sh '''
+              zip ../${COMPONENT}.zip node_modules server.js
+            '''
+        }
+
+    }
+
+    stage('Compile Code') {
+      when {
+          environment name: 'APP_TYPE', value: 'JAVA'
+      }      
+      steps {
+        sh '''
+          mvn compile
+        '''
+      }
+    }
+
+    stage('Make Package') {
+      when {
+          environment name: 'APP_TYPE', value: 'JAVA'
+      }        
+      steps {
+        sh '''
+          mvn package
+        '''
+      }
+    }
+
+    stage('Prepare Artifacts') {
+      when {
+          environment name: 'APP_TYPE', value: 'JAVA'
+      }
+      steps {
+        sh '''
+          cp target/*.jar users.jar 
+          zip ../users.zip users.jar
+        '''
+      }
+    }    
 
     stage('Upload Artifact') {
       steps {
