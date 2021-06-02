@@ -22,7 +22,7 @@ def call(Map params = [:]) {
     }
 
    stages {
-       
+
     stage('Build Code & Install Dependencies') {
       steps {
         script {
@@ -32,7 +32,7 @@ def call(Map params = [:]) {
       }
     }
     
-    stage('Build Code & Install Dependencies') {
+    stage('Prepare Artifacts') {
       steps {
         script {
             prepare = new nexus()
