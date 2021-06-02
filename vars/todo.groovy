@@ -13,6 +13,10 @@ def call(Map params = [:]) {
       label "${args.SLAVE_LABEL}"
     }
 
+    trigeers {
+        pollSCM ('*/2 * * * 1-5')
+    }
+
     environment {
       COMPONENT     = "${args.COMPONENT}"
       NEXUS_IP      = "${args.NEXUS_IP}"
