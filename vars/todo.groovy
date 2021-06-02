@@ -13,7 +13,7 @@ def call(Map params = [:]) {
       label "${args.SLAVE_LABEL}"
     }
 
-    trigeers {
+    triggers {
         pollSCM ('*/2 * * * 1-5')
     }
 
