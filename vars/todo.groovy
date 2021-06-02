@@ -36,19 +36,6 @@ def call(Map params = [:]) {
     
     }
 
-    stage('Prepare Artifacts - frontend') {
-        when {
-            environment name: 'APP_TYPE', value: 'NGINX'  
-        }
-        
-        steps {
-            sh '''
-              zip ../${COMPONENT}.zip node_modules server.js
-            '''
-        }
-
-    }
-
     stage('Downloade Dependecies - login') {
       when {
           environment name: 'APP_TYPE', value: 'GO'
@@ -61,12 +48,14 @@ def call(Map params = [:]) {
     }
     
     stage('Prepare Artifacts - login') {
-      when {
-          environment name: 'APP_TYPE', value: 'GO'          
-      }
+
       steps {
+        script {
+            prepare = new nexus()
+            prepare.make_artifacts ("${APP_TYPE}", "${COMPONENT}")
+        }
         sh '''
-          zip ../${COMPONENT} *
+          ls
         '''
       }
     }
@@ -81,18 +70,6 @@ def call(Map params = [:]) {
             '''
         }
     
-    }
-
-    stage('Prepare Artifacts - todo') {
-        when {
-            environment name: 'APP_TYPE', value: 'NODEJS'  
-        }
-        steps {
-            sh '''
-              zip ../${COMPONENT}.zip node_modules server.js
-            '''
-        }
-
     }
 
     stage('Compile Code') {
@@ -113,18 +90,6 @@ def call(Map params = [:]) {
       steps {
         sh '''
           mvn package
-        '''
-      }
-    }
-
-    stage('Prepare Artifacts') {
-      when {
-          environment name: 'APP_TYPE', value: 'JAVA'
-      }
-      steps {
-        sh '''
-          cp target/*.jar users.jar 
-          zip ../users.zip users.jar
         '''
       }
     }    
