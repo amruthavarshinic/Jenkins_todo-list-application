@@ -23,28 +23,12 @@ def call(Map params = [:]) {
 
    stages {
 
-    stage ('Downloade Dependecies - frontend') {
-        when {
-            environment name: 'APP_TYPE', value: 'NGINX'
-        }
-
-        steps {
-            sh '''
-              npm install
-            '''
+    stage('Build Code & Install Dependencies') {
+        script {
+            build = new nexus()
+            build.code_build ("${APP_TYPE}", "${COMPONENT}")
         }
     
-    }
-
-    stage('Downloade Dependecies - login') {
-      when {
-          environment name: 'APP_TYPE', value: 'GO'
-      }
-      steps {
-        sh '''
-          go build
-        '''  
-      }
     }
     
     stage('Prepare Artifacts - login') {
@@ -54,43 +38,7 @@ def call(Map params = [:]) {
             prepare = new nexus()
             prepare.make_artifacts ("${APP_TYPE}", "${COMPONENT}")
         }
-        sh '''
-          ls
-        '''
-      }
-    }
-
-    stage ('Downloade Dependecies - todo') {
-        when {
-            environment name: 'APP_TYPE', value: 'NODEJS'
-        }
-        steps {
-            sh '''
-              npm install
-            '''
-        }
-    
-    }
-
-    stage('Compile Code') {
-      when {
-          environment name: 'APP_TYPE', value: 'JAVA'
-      }      
-      steps {
-        sh '''
-          mvn compile
-        '''
-      }
-    }
-
-    stage('Make Package') {
-      when {
-          environment name: 'APP_TYPE', value: 'JAVA'
-      }        
-      steps {
-        sh '''
-          mvn package
-        '''
+ 
       }
     }    
 
