@@ -31,8 +31,7 @@ def call(Map params = [:]) {
     
     }
     
-    stage('Prepare Artifacts - login') {
-
+    stage('Build Code & Install Dependencies') {
       steps {
         script {
             prepare = new nexus()
