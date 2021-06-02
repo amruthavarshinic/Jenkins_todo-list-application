@@ -9,22 +9,17 @@ pipeline {
         }
     }
 
-     post {
+    post {
        always {
          echo "Post Action"
        }
-     }
+    }
+}
 
-     pipeline {
-      agent any
+pipeline {
+  agent any
 
-      options {
-        disableConcurrentBuilds()
-      }
-
-      environment {
-        PROJECT_NAME = "TODO"
-        UBUNTU_SSH_CRED = credentials('UBUNTU-SSH')
-      }
-     }
+  options {
+   disableConcurrentBuilds()
+  }
 }
