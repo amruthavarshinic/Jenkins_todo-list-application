@@ -48,8 +48,5 @@ def call(Map params = [:]) {
         }
       }
     }
-  }
-
- }
-  
+  } 
 } 
