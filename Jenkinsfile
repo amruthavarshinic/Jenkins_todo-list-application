@@ -17,6 +17,8 @@ pipeline {
 }
 
 pipeline {
+    agent any
+    
     options {
         disableConcurrentBuilds()
     }
