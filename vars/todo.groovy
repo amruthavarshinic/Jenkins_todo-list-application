@@ -25,7 +25,7 @@ def call(Map params = [:]) {
 
     stage ('Downloade Dependecies - frontend') {
         when {
-            environment name: 'COMPONENT', value: 'frontend'
+            environment name: 'APP_TYPE', value: 'NGINX'
         }
 
         steps {
@@ -38,7 +38,7 @@ def call(Map params = [:]) {
 
     stage('Prepare Artifacts - frontend') {
         when {
-            environment name: 'COMPONENT', value: 'frontend'  
+            environment name: 'APP_TYPE', value: 'NGINX'  
         }
 
         steps {
@@ -51,7 +51,7 @@ def call(Map params = [:]) {
 
     stage('Downloade Dependecies - login') {
       when {
-          environment name: 'COMPONENT', value: 'login'
+          environment name: 'APP_TYPE', value: 'GO'
       }
       steps {
         sh '''
@@ -62,7 +62,7 @@ def call(Map params = [:]) {
     
     stage('Prepare Artifacts - login') {
       when {
-          environment name: 'COMPONENT', value: 'login'          
+          environment name: 'APP_TYPE', value: 'GO'          
       }
       steps {
         sh '''
