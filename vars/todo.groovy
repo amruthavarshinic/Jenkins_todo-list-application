@@ -22,6 +22,9 @@ def call(Map params = [:]) {
    stages {
 
     stage('Downloade Dependecies') {
+      when {
+          environment name: 'APP_TYPE', value: 'NODEJS'      
+      }
       steps {
         sh '''
           go build
@@ -42,9 +45,9 @@ def call(Map params = [:]) {
 
     stage('Upload Artifact') {
       steps {
-        sh '''
-         curl -v -u admin:admin123 --upload-file /home/ubuntu/workspace/TODO_CI-Pipelines/login.zip http://172.31.52.12:8081/repository/login/login.zip
-        '''
+        script {
+           nexus
+        }
       }
     }
   }
