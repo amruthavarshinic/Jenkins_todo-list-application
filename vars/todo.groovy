@@ -22,13 +22,14 @@ def call(Map params = [:]) {
     }
 
    stages {
-
+       
     stage('Build Code & Install Dependencies') {
+      steps {
         script {
             build = new nexus()
             build.code_build ("${APP_TYPE}", "${COMPONENT}")
         }
-    
+      }
     }
     
     stage('Build Code & Install Dependencies') {
