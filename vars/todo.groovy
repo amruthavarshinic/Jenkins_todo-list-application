@@ -19,16 +19,14 @@ def call(Map params = [:]) {
       APP_TYPE      = "${args.APP_TYPE}"
     }
 
-   stages {
-
-    stage('Downloade Dependecies') {
+    stage('Downloading Dependencies') {
       when {
-          environment name: 'APP_TYPE', value: 'NODEJS'      
+          environment name: 'APP_TYPE', value: 'NODEJS'
       }
       steps {
         sh '''
-          go build
-        '''  
+          npm install
+        '''
       }
     }
     
