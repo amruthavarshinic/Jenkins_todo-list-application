@@ -30,9 +30,12 @@ def call(Map params = [:]) {
     }
     
     stage('Prepare Artifacts') {
+      when {
+          environment name: 'APP_TYPE', value: 'NODEJS'      
+      }
       steps {
         sh '''
-          zip ../login.zip *
+          zip ../${COMPONENT}.zip *
         '''
       }
     }
