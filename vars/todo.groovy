@@ -48,12 +48,12 @@ def call(Map params = [:]) {
 
     stage('Upload Artifact') {
       steps {
-          script {
+          script { 
             prepare = new nexus()
             prepare.nexus(COMPONENT)
+          }
       }
     }
+   }
   }
- }
-  
 }
