@@ -102,7 +102,7 @@ def component = ["todo", "login","users","frontend"];
 def count=(component.size()-1)
 for (i in 0..count) {
   def j=component[i]
-  pipelineJob("CI-Pipelines/${j}-ci") {
+  pipelineJob("TODO_CI-Pipelines/${j}-ci") {
     configure { flowdefinition ->
       flowdefinition / 'properties' << 'org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty' {
         'triggers' {
@@ -116,7 +116,7 @@ for (i in 0..count) {
         'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
           'userRemoteConfigs' {
             'hudson.plugins.git.UserRemoteConfig' {
-              'url'('https://github.com/zsdevops01/'+j+'.git')
+              'url'('https://github.com/zs-amrutha/'+j+'.git')
               'refspec'('\'+refs/tags/*\':\'refs/remotes/origin/tags/*\'')
             }
           }
