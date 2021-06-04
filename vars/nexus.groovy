@@ -11,19 +11,19 @@ def make_artifacts(APP_TYPE, COMPONENT) {
   get_branch = "env | grep GIT_BRANCH | awk -F / '{print \$NF}' | xargs echo -n"
   def get_branch_exec=sh(returnStdout: true, script: get_branch)
   def FILENAME=COMPONENT+'-'+get_branch_exec+'.zip'
-  if(APP_TYPE == "NODEJS") {
+  if(COMPONENT == "frontend") {
     command = "zip -r ${FILENAME} *"
     def execute_com=sh(returnStdout: true, script: command)
     print execute_com
-  } else if(APP_TYPE == "NODEJS") {
+  } else if(COMPONENT == "todo") {
     command = "zip -r ${FILENAME} *"
     def execute_com=sh(returnStdout: true, script: command)
     print execute_com
-  } else if(APP_TYPE == "JAVA") {
+  } else if(COMPONENT == "users") {
     command = "cp target/*.jar ${COMPONENT}.jar && zip -r ${FILENAME} ${COMPONENT}.jar"
     def execute_com=sh(returnStdout: true, script: command)
     print execute_com
-  } else if(APP_TYPE == "Go") {
+  } else if(COMPONENT == "login") {
     command = "zip -r ${FILENAME} *"
     def execute_com=sh(returnStdout: true, script: command)
     print execute_com
@@ -31,19 +31,19 @@ def make_artifacts(APP_TYPE, COMPONENT) {
 }
 
 def code_build(APP_TYPE, COMPONENT) {
-  if(APP_TYPE == "NODEJS") {
+  if(COMPONENT == "frontend") {
     command = "npm install && npm run build"
     def execute_com=sh(returnStdout: true, script: command)
     print execute_com
-  } else if(APP_TYPE == "JAVA") {
+  } else if(COMPONENT == "users") {
     command = "mvn clean package"
     def execute_com=sh(returnStdout: true, script: command)
     print execute_com
-  } else if(APP_TYPE == "NODEJS") {
+  } else if(COMPONENT == "todo") {
     command = "npm install"
     def execute_com=sh(returnStdout: true, script: command)
     print execute_com
-  }else if(APP_TYPE == "NODEJS") {
+  }else if(COMPONENT == "login") {
     command = "go build"
     def execute_com=sh(returnStdout: true, script: command)
     print execute_com
