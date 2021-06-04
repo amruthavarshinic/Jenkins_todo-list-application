@@ -12,23 +12,27 @@ def make_artifacts(APP_TYPE, COMPONENT) {
   def get_branch_exec=sh(returnStdout: true, script: get_branch)
   def FILENAME=COMPONENT+'-'+get_branch_exec+'.zip'
   if(APP_TYPE == "NODEJS") {
-    command = "zip -r ${FILENAME} node_modules server.js"
+    command = "zip -r ${FILENAME} *"
     def execute_com=sh(returnStdout: true, script: command)
     print execute_com
   } else if(APP_TYPE == "NODEJS") {
-    command = "zip -r ${FILENAME} node_modules server.js"
+    command = "zip -r ${FILENAME} *"
     def execute_com=sh(returnStdout: true, script: command)
     print execute_com
   } else if(APP_TYPE == "JAVA") {
     command = "cp target/*.jar ${COMPONENT}.jar && zip -r ${FILENAME} ${COMPONENT}.jar"
     def execute_com=sh(returnStdout: true, script: command)
     print execute_com
-  } 
+  } else if(APP_TYPE == "Go") {
+    command = "zip -r ${FILENAME} *"
+    def execute_com=sh(returnStdout: true, script: command)
+    print execute_com
+  }    
 }
 
 def code_build(APP_TYPE, COMPONENT) {
   if(APP_TYPE == "NODEJS") {
-    command = "npm install"
+    command = "npm install && npm run build"
     def execute_com=sh(returnStdout: true, script: command)
     print execute_com
   } else if(APP_TYPE == "JAVA") {
@@ -39,5 +43,10 @@ def code_build(APP_TYPE, COMPONENT) {
     command = "npm install"
     def execute_com=sh(returnStdout: true, script: command)
     print execute_com
+  }else if(APP_TYPE == "NODEJS") {
+    command = "go build"
+    def execute_com=sh(returnStdout: true, script: command)
+    print execute_com
   }
+
 }
