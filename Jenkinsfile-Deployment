@@ -17,6 +17,9 @@ pipeline {
 
         stage('Find the Server') {
             steps {
+                withCredentials([aws(accessKeyVariable: 'AKIAWUVJXXHZCNN2ZW72', credentialsId: 'Aws_cred', secretKeyVariable: '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')]) {
+                 // some block
+                }
                 sh 'aws ec2 describe-instances --filters "Name=tag:Name,Values=${COMPONENT}-${ENV}" --region us-east-1 | jq .Reservations[].Instances[].PrivateIpAddress |xargs -n1 > inv'
             }
         }
