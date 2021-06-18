@@ -19,7 +19,7 @@ pipeline {
             steps {
 
                 sh '''
-                    aws ec2 describe-instances --filters "Name=tag:Name,Values=frontend-dev"
+                    'aws s3 ls'
                 '''
             }
         }
