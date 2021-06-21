@@ -1,26 +1,49 @@
 pipeline {
-    agent any
+    agent {
+        label "ANSIBLE"
+    }
+
+    environment {
+        UBUNTU_SSH_PASSWORD = credentials('UBUNTU_SSH_PASSWORD')
+    }
+
+    parameters {
+        choice(name: 'ENV', choices: ['dev', 'prod' ], description: 'Select Environment')
+        string(name: 'COMPONENT', defaultValue: '', description: 'Which Component to deploy')
+        string(name: 'VERSION', defaultValue: '', description: 'Which Version of Component to deploy')
+    }
 
     stages {
-        stage('Hello') {
+
+        stage('Find the Server') {
             steps {
-                echo 'Hello World'
+                withCredentials([aws(accessKeyVariable: 'AKIAWUVJXXHZCNN2ZW72', credentialsId: 'Aws_cred', secretKeyVariable: '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')]) {
+                 // some block
+                }
+                sh 'aws ec2 describe-instances --filters "Name=tag:Name,Values=${COMPONENT}-${ENV}" --region us-east-1 | jq .Reservations[].Instances[].PrivateIpAddress |xargs -n1 > inv'
             }
         }
-    }
 
-    post {
-       always {
-         echo "Post Action"
-       }
-    }
-    
-}
+        stage('Deploy to DEV Env') {
+            when {
+                environment name: 'ENV', value: 'dev'
+            }
+            steps {
+                git branch: 'main', credentialsId: 'git-cred', url: 'https://github.com/zs-amrutha/Ansible.git'
+                sh '''
+                    ansible-playbook -i inv todo.yml -t ${COMPONENT} -e COMPONENT=${COMPONENT} -e ENV=${ENV} -e APP_VERSION=${VERSION} -e ansible_password=${UBUNTU_SSH_PASSWORD}
+                '''
+            }
+        }
 
-pipeline {
-    agent any
+        stage('Deploy to PROD Env') {
+            when {
+                environment name: 'ENV', value: 'prod'
+            }
+            steps {
+                sh 'echo ansible-playbook .....'
+            }
+        }
 
-    options {
-        disableConcurrentBuilds()
     }
 }
