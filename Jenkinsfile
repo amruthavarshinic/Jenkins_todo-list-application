@@ -17,7 +17,9 @@ pipeline {
 
         stage('Find the Server') {
             steps {
-                sh 'aws s3 ls' 
+                sh '''
+                 aws ec2 describe-instances --filters "Name=tag:Name,Values=${COMPONENT}-${ENV}" --region us-east-1 | jq .Reservations[].Instances[].PrivateIpAddress |xargs -n1 > inv
+                '''
 
             }
         }
