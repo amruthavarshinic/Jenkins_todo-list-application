@@ -29,7 +29,7 @@ pipeline {
             steps {
                 git branch: 'main', credentialsId: 'git-cred', url: 'https://github.com/zs-amrutha/Ansible.git'
                 sh '''
-                    ansible-playbook -i inv todo.yml -t ${COMPONENT} -e COMPONENT=${COMPONENT} -e ENV=${ENV} -e APP_VERSION=${VERSION} -e ansible_password=${UBUNTU_SSH_PASSWORD}
+                    ansible-playbook -i 172.31.4.228, todo.yml -t ${COMPONENT} -e COMPONENT=${COMPONENT} -e ENV=${ENV} -e APP_VERSION=${VERSION} -e ansible_password=${UBUNTU_SSH_PASSWORD}
                 '''
             }
         }
