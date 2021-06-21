@@ -17,7 +17,7 @@ pipeline {
 
         stage('Find the Server') {
             steps {
-                sh 'echo ansible-playbook' 
+                sh 'aws ec2 describe-instances --filters "Name=tag:Name,Values=frontend-dev" --region us-east-1' 
 
             }
         }
