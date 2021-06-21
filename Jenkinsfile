@@ -17,7 +17,7 @@ pipeline {
 
         stage('Find the Server') {
             steps {
-                sh 'aws ec2 describe-instances --filters "Name=tag:Name,Values=frontend-dev" --region us-east-1' 
+                sh 'aws s3 ls' 
 
             }
         }
