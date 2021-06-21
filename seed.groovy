@@ -59,7 +59,7 @@ pipelineJob("TODO_Deployment-Pipeline") {
           }
         }
       }
-      'scriptPath'('Jenkinsfile-Deployment')
+      'scriptPath'('Jenkinsfile')
       'lightweight'(true)
     }
   }
