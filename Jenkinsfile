@@ -4,7 +4,7 @@ pipeline {
     }
 
     environment {
-        UBUNTU_SSH = credentials('UBUNTU_SSH')
+        UBUNTU_SSH_PASSWORD = credentials('UBUNTU_SSH_PASSWORD')
     }
 
     parameters {
@@ -33,7 +33,7 @@ pipeline {
             steps {
                 git branch: 'main', credentialsId: 'git-cred', url: 'https://github.com/zs-amrutha/Ansible.git'
                 sh '''
-                    ansible-playbook -i inv todo.yml -t ${COMPONENT} -e COMPONENT=${COMPONENT} -e ENV=${ENV} -e APP_VERSION=${VERSION} -e ansible_password=${UBUNTU_SSH}
+                    ansible-playbook -i inv todo.yml -t ${COMPONENT} -e COMPONENT=${COMPONENT} -e ENV=${ENV} -e APP_VERSION=${VERSION} -e ansible_password=${UBUNTU_SSH_PASSWORD}
                 '''
             }
         }
