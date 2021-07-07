@@ -17,7 +17,7 @@ Folder folder= Jenkins.instance.createProject(Folder.class, "Folder-A")
 ComputerLauncher launcher = new hudson.plugins.sshslaves.SSHLauncher(
         "host", // Host
         22, // Port
-        "credentialsId", // Credentials
+        "UBUNTU_SSH", // Credentials
         (String)null, // JVM Options
         (String)null, // JavaPath
         (String)null, // Prefix Start Slave Command
@@ -29,11 +29,11 @@ ComputerLauncher launcher = new hudson.plugins.sshslaves.SSHLauncher(
 // Define a "Permanent Agent"
 Slave node = new DumbSlave(
         "agent-node-2",
-        "/home/jenkins",
+        "/home/ubuntu",
         launcher)
 node.nodeDescription = "Agent node description"
 node.numExecutors = 1
-node.labelString = "agent-node-label"
+node.labelString = "JAVA NODEJS Ansible"
 node.mode = Node.Mode.NORMAL
 node.retentionStrategy = new RetentionStrategy.Always()
 
