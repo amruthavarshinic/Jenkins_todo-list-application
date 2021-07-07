@@ -21,7 +21,7 @@ Jenkins.instance.nodes.each {
 */
 
 // The "build" object is added by the Jenkins Groovy plugin and can resolve parameters and such
-String agentList = build.buildVariableResolver.resolve('Agent-1')
+String agentList = build.buildVariableResolver.resolve('Agent1')
 String agentDescription = build.buildVariableResolver.resolve('AgentDescription')
 String agentHome = build.buildVariableResolver.resolve('/home/ubuntu')
 String agentExecutors = build.buildVariableResolver.resolve('2')
